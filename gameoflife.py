@@ -1,3 +1,10 @@
+"""
+nariši vzores s stiskom miške
+začni simulacijo - space bar
+pospeši simulacijo - puščica gor
+upočasni simulacijo - puščica dol
+"""
+
 def cells_update(screen, cells, size):
     """funkcija za posodabljanje celic - vrne array posodobljenih celic"""
     newcells = numpy.zeros((cells.shape[0], cells.shape[1]))
@@ -30,6 +37,8 @@ import time
 
 pygame.init()
 screen_size = 800
+
+#izdelava okenca
 pygame.display.set_caption("game of life")
 screen = pygame.display.set_mode((screen_size, screen_size))
 
@@ -54,10 +63,10 @@ pygame.display.update()
 
 #glavna zanka
 while True:
-
     for Q in pygame.event.get():                      #zapiranje okenca z rdečim križcem
         if Q.type == pygame.QUIT:
             pygame.quit()
+            exit()
 
         elif Q.type == pygame.KEYDOWN:                 #ustavitev in ponoven začetek simulacije
             if Q.key == pygame.K_SPACE:
@@ -78,14 +87,16 @@ while True:
                     sleep = sleep + 0.01
                 else:
                     sleep = sleep + 0.002
-
-        if pygame.mouse.get_pressed()[0]:                #risanje začetne pozicije živih celic
-            pos = pygame.mouse.get_pos()
-            cells[pos[1] // size, pos[0] // size] = 1
-            cells_update(screen, cells, size)
-            pygame.display.update()
-
-    screen.fill(c_background)
+        try:
+            if pygame.mouse.get_pressed()[0]:                #risanje začetne pozicije živih celic
+                pos = pygame.mouse.get_pos()
+                cells[pos[1] // size, pos[0] // size] = 1
+                cells_update(screen, cells, size)
+                pygame.display.update()
+                screen.fill(c_background)
+        except:
+            pass
+        
 
     if running:                                          #potek simulacije
         cells = cells_update(screen, cells, size)
