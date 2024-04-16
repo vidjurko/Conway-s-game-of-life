@@ -38,7 +38,7 @@ cell_size = 32
 cells = numpy.zeros((cell_size, cell_size))
 size = int(screen_size/cell_size) + 1
 
-#barve
+#barve celic
 c_dead = (0, 0, 0,)
 c_background = (70, 70, 70)
 c_alive = (255, 255, 255)
@@ -55,7 +55,7 @@ pygame.display.update()
 #glavna zanka
 while True:
 
-    for Q in pygame.event.get():
+    for Q in pygame.event.get():                      #zapiranje okenca z rdečim križcem
         if Q.type == pygame.QUIT:
             pygame.quit()
 
@@ -65,7 +65,7 @@ while True:
                 cells_update(screen, cells, size)
                 pygame.display.update()
 
-            if Q.key == pygame.K_UP:
+            if Q.key == pygame.K_UP:                   #pospešitev simulacije s puščico gor
                 if sleep > 0.01:
                     sleep = sleep - 0.01
                 elif  0.01 > sleep > 0.002:
@@ -73,7 +73,7 @@ while True:
                 elif 0.003 > sleep > 0.0002:
                     sleep = sleep - 0.0002
 
-            if Q.key == pygame.K_DOWN:
+            if Q.key == pygame.K_DOWN:                 #upočasnitev simulacije s puščico dol
                 if sleep > 0.01:
                     sleep = sleep + 0.01
                 else:
